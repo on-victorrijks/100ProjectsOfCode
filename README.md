@@ -12,7 +12,6 @@ To get started with the project ideas:
 6. Check the completed item, and repeat with another project idea
 
 ## Categories
-
 ### General Web & Networking Projects  
 General Web projects, from building a simple website to building tools for complex and difficult networking tasks like packet sniffing.  
   - [ ] [FTP Client](#ftp-client)
@@ -28,6 +27,7 @@ General Web projects, from building a simple website to building tools for compl
   - [ ] [Your Portfolio Website](#portfolio-website)
   - [ ] [Animated Navigation Toggle](#animated-navigation-toggle)
   - [ ] [Country Lookup using IP address](#country-lookup-using-ip-address)
+  - 13 projects
 ### Bots  
 Building automated bots is something you really want to try out at some point in your career/life.  
   - [ ] [Chatbot](#chatbot)
@@ -35,6 +35,7 @@ Building automated bots is something you really want to try out at some point in
   - [ ] [Twitter Bot](#twitter-bot)
   - [ ] [Messenger Bot](#messenger-bot)
   - [ ] [WhatsApp Butler](#whatsapp-butler)
+  - 5 projects
 ### Software & Apps  
 Proper software or application suggestions that you may even end up using in your daily life, like a simple text editor or a custom music player.  
   - [ ] [Quiz App](#quiz-app)
@@ -63,6 +64,7 @@ Proper software or application suggestions that you may even end up using in you
   - [ ] [Video Call Application](#video-call-application)
   - [ ] [Library Management System](#library-management-system)
   - [ ] [Relational Database Management System](#relational-database-management-system)
+  - 26 projects
 ### Artificial Intelligence  
 Projects that mostly deal with Artificial Intelligence or Machine Learning. Ideal to showcase on your portfolio if you are thinking of apply for any AI related jobs or programs.  
   - [ ] [Face Tracking](#face-tracker)
@@ -75,6 +77,7 @@ Projects that mostly deal with Artificial Intelligence or Machine Learning. Idea
   - [ ] [Automatic Logo Generator](#automatic-logo-generator)
   - [ ] [Movie Recommendation System](#movie-recommendation-system)
   - [ ] [Audio to Sign Language Translator](#audio-to-sign-laguage-translator)
+  - 10 projects
 ### Theoretical Computer Science  
 Projects that provide a deeper insight into the inner workings of many CS related stuff that you may be using knowingly or unknowingly in your daily life.  
   - [ ] [Build an OS](#build-an-os)
@@ -86,6 +89,7 @@ Projects that provide a deeper insight into the inner workings of many CS relate
   - [ ] [Pathfinding Visualizer](#pathfinding-visualizer)
   - [ ] [Version Control System](#version-control-system)
   - [ ] [Code a Programming Language](#programming-language)
+  - 9 projects
 ### Cryptography  
 Projects that involve dealing with encryption/decryption or in general computer security.  
   - [ ] [Codec Software](#codec-software)
@@ -93,6 +97,7 @@ Projects that involve dealing with encryption/decryption or in general computer 
   - [ ] [Password Generator](#password-generator)
   - [ ] [Folder Encrypter/Locker](#folder-encrypter)
   - [ ] [Password Strength Checker](#password-strength-checker)
+  - 5 projects
 ### Simulations, Games and Game AI  
 All work and no play makes jack a dull boy! Games are a must to enjoy and learn many of the concepts of programming including OOPS.  
   - [ ] [Pong](#pong)
@@ -115,23 +120,32 @@ All work and no play makes jack a dull boy! Games are a must to enjoy and learn 
   - [ ] [Simulate the World](#simulate-the-world)
   - [ ] [Character Generator](#character-generator)
   - [ ] [Conway's Game of Life](#game-of-life)
+  - 20 projects
 ### Miscellaneous  
 These were alone in their own categories and I didn't want them to feel alone, so I pooled them together.  
   - [ ] [Deal Finder](#deal-finder)
   - [ ] [Expense Tracker](#expense-tracker)
   - [ ] [Recipe Generator](#recipe-generator)
-  - [ ] [Emoji Translator](#emoji-translator)
+  - [:hourglass:] [Emoji Translator](#emoji-translator)
   - [ ] [Regex Query Tool](#regex-query-tool)
   - [ ] [Currency Converter](#currency-converter)
   - [ ] [Pixel Art Generator](#pixel-art-generator)
   - [ ] [Directory Tree Generator](#directory-tree-generator)
   - [ ] [Random username Generator](#random-username-generator)
   - [ ] [Roman to Decimal Converter](#roman-to-decimal-converter)
+  - 10 projects
 ### Coding Challenges  
 Some recommended channels to work on more problems and sharpen your coding skills.  
   - [ ] [Project Euler](#project-euler)
   - [ ] [Advent-Of-Code](#advent-of-code)
   - [ ] [Kaggle's Titanic Challenge](#kaggle-titanic-challenge)
+  - 3 projects
+ 
+  
+### Results
+
+  0/101
+  
 
 
 <!--
