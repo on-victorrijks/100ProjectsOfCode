@@ -126,7 +126,7 @@ These were alone in their own categories and I didn't want them to feel alone, s
   - [ ] [Deal Finder](#deal-finder)
   - [ ] [Expense Tracker](#expense-tracker)
   - [ ] [Recipe Generator](#recipe-generator)
-  - [:hourglass:] [Emoji Translator](#emoji-translator)
+  - [ ] [Emoji Translator](#emoji-translator) :hourglass:
   - [ ] [Regex Query Tool](#regex-query-tool)
   - [ ] [Currency Converter](#currency-converter)
   - [ ] [Pixel Art Generator](#pixel-art-generator)
