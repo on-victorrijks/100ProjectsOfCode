@@ -126,7 +126,7 @@ These were alone in their own categories and I didn't want them to feel alone, s
   - [ ] [Deal Finder](#deal-finder)
   - [ ] [Expense Tracker](#expense-tracker)
   - [ ] [Recipe Generator](#recipe-generator)
-  - [ ] [Emoji Translator](#emoji-translator) :hourglass:
+  - [x] [Emoji Translator](#emoji-translator)
   - [ ] [Regex Query Tool](#regex-query-tool)
   - [ ] [Currency Converter](#currency-converter)
   - [ ] [Pixel Art Generator](#pixel-art-generator)
@@ -144,7 +144,7 @@ Some recommended channels to work on more problems and sharpen your coding skill
   
 ### Results
 
-  0/101
+  1/101
   
 
 
