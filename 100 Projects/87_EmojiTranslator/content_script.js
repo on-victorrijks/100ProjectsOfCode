@@ -1,103 +1,127 @@
+text_emoji_EN = {
+    "⌚":["clock","time","timer"],
+    "☕":"cofee",
+    "💧": ["water","liquid"],
+    "⛔": "stop",
+    "🌱": ["plant","plants"],
+    "🌭": ["hotdog","hotdogs"],
+    "🌮": ["taco", "tacos"],
+    "🌯": ["wrap","wraps"],
+    "🌽": ["corn","corns"],
+    "🍅": ["tomato","tomatoes"],
+    "🍖": ["animal","animals"],
+    "🌾":"wheat",
+    "🍚":"rice",
+    "🌰":"nuts",
+    "🍎":["fruit","fruits"],
+    "🍼":"milk",
+    "🍺":"beer",
+    "🍻":"beers",
+    "🍷":"wine"
+}
 
-function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
+String.prototype.replaceAll = function(strReplace, strWith) {
+    // See http://stackoverflow.com/a/3561711/556609
+    var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    var reg = new RegExp(esc, 'ig');
+    return this.replace(reg, strWith);
+};
+
+function getWordsEmojis(){
+    words = {};
+
+    for (const emoji in text_emoji_EN) {
+
+        const rec_words = text_emoji_EN[emoji];
+        if(typeof(rec_words) == typeof([])){
+            rec_words.forEach(word => {
+                words[word] = emoji;
+            });
+        } else {
+            words[rec_words] = emoji;
+        }
+
     }
-  }
 
-function getDayWidth(){
-    return document.getElementById('3').scrollWidth;
+    return [words,text_emoji_EN]
 }
 
-var dayWidth = getDayWidth();
+function translate(words_emojis,isToEmojis){
 
+    if(isToEmojis){
+        temp_data = words_emojis[0];
+    }
 
-
-
-
-function recoverWeeksBtn() {
-    var allButtons = document.querySelectorAll("button.x-btn-text");
-
-    let weeksBtns = [];
-
-    allButtons.forEach(ButtonTVRF => {
-        btnText = ButtonTVRF.innerText;
-        if(btnText[0] == "S" && btnText !== "Samedi"){
-            weeksBtns.push(ButtonTVRF);
-        }
-    });
-
-    return weeksBtns 
-}
-
-function recoverProgram() {
-
-    var allActivities = document.querySelectorAll(".grilleData div");
-
-    let verifiedActivities = [];
-
-    allActivities.forEach(ActivityTVRF => {
-        ActivityTVRF_id = ActivityTVRF.id;
-        if(ActivityTVRF_id[0] == "d"){
-
-            var subActivityData = ActivityTVRF.querySelector('div');
-            var subActivityData_label = subActivityData.getAttribute('aria-label').split('null');
-            var subActivityData_label = subActivityData_label.filter(function(entry) { return entry.trim() != ''; });
-
-            var subActivityData_time = subActivityData_label.pop().split(" ").filter(function(entry) { return entry.trim() != ''; });
-            var subActivityData_fullLabel = subActivityData_label.toString();
-            var subActivityData_day = Math.round((ActivityTVRF.parentElement.style.left.slice(0, -2))/dayWidth)+1;
-            
-            var verifiedActivity = [
-                subActivityData_fullLabel,
-                subActivityData_time,
-                subActivityData_day
-            ];
-            
-            verifiedActivities.push(verifiedActivity);
-        }
-    });
-
-    return verifiedActivities;
-}
-
-function saveDataToFile(received_data){
-    var _received_data = JSON.stringify(received_data);
+    supportedContainer_foundElement = {
+        caption:[],
+        h1:[],
+        h2:[],
+        h3:[],
+        h4:[],
+        h5:[],
+        b:[],
+        p:[],
+        span:[],
+        tt:[],
+        i:[],
+        big:[],
+        small:[],
+        em:[],
+        strong:[],
+        dfn:[],
+        //code:[],
+        samp:[],
+        kbd:[],
+        cite:[],
+        abbr:[],
+        acronym:[],
+        sub:[],
+        sup:[],
+        span:[],
+        a:[],
+        pre:[],
+        li:[],
+        label:[],
+        textarea:[],
+        button:[],
+        td:[],
+        th:[],
+        title: [],
+        textarea: [],
+    };
     
-    var vLink = document.createElement('a'),
-    vBlob = new Blob([_received_data], {type: "octet/stream"}),
-    vName = 'easyUCL_data.json',
-    vUrl = window.URL.createObjectURL(vBlob);
-    vLink.setAttribute('href', vUrl);
-    vLink.setAttribute('download', vName );
-    vLink.click();
-} 
+    for (const container in supportedContainer_foundElement) {
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+        var directTextContainer = [];
+        var subContainers = document.querySelectorAll(container);
 
-async function scrapeData(){
+        subContainers.forEach(sContainer => {
+            
+            if (/<\/?[a-z][\s\S]*>/i.test(sContainer.innerHTML) == false){
+                sContainer_words = sContainer.innerHTML
+                sContainer_words_ar = sContainer_words.split(" ");
+                temp_text = sContainer_words;
+                
+                for (let index = 0; index < sContainer_words_ar.length; index++) {{}
+                    const html_word = sContainer_words_ar[index].toLowerCase();
 
-    var allData = [];
+                    if(temp_data[html_word] != undefined){
 
-    weeksInstances = recoverWeeksBtn();
-    weekID = 0;
-    for (let weekID = 0; weekID < weeksInstances.length; weekID++) {
-        weeksInstances[weekID].click();
-        weekTxt = weeksInstances[weekID].innerText;
-        console.log("Moving to next week");
-        await sleep(500);
-        allData.push([weekTxt,recoverProgram()]);
-        console.log("New week added");
+                        temp_text = temp_text.replaceAll(html_word, temp_data[html_word]);
+                        console.log(html_word+" replaced");
+                    }
+                    
+                }
+
+                sContainer.innerHTML = temp_text;
+
+            }
+
+
+        });
+
     }
 
-    saveDataToFile(JSON.stringify(allData));
-    return allData;
 }
 
-scrapeData();
-
+translate(getWordsEmojis(),true)
