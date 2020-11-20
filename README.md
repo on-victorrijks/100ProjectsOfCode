@@ -106,7 +106,7 @@ All work and no play makes jack a dull boy! Games are a must to enjoy and learn 
   - [ ] [Chess](#chess)
   - [ ] [Snake](#snake)
   - [ ] [Tetris](#tetris)
-  - [ ] [Chess AI](#chess-ai)
+  - [⏳] [Chess AI](#chess-ai)
   - [ ] [Snake AI](#snake-ai)
   - [ ] [Map Maker](#map-maker)
   - [ ] [Battleship](#battleship)
