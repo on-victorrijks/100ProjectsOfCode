@@ -105,6 +105,77 @@
           "url": "",
           "style": ""
         }
+      },
+      "Prices" :{
+        "title": {
+          "text":"Pricing",
+          "colors": ["#000"],
+          "style": "center medium underline"
+        },
+        "descType": "prices",
+        "desc": {
+          "text":"",
+          "style": ""
+        },
+        "tables":[
+          {
+            "pictureUrl": "MacBookAir_classic.png",
+            "title": "MacBook Air" ,
+            "pricing": ["999","83.25","12"],
+            "currency": "$",
+            "specs": [
+              "13.3-inch Retina display",
+              "Apple M1 chip",
+              "Up to 16GB memory",
+              "Up to 2TB storage",
+              "Up to 18 hours battery life",
+              "Touch ID"
+            ],
+            "ShowLearnMore": false
+          },
+          {
+            "pictureUrl": "MacBookPro_13.png",
+            "title": "MacBook Pro 13\"" ,
+            "pricing": ["1299","108.25","12"],
+            "currency": "$",
+            "specs": [
+              "13.3-inch Retina display",
+              "Apple M1 chip",
+              "Also available with Intel Core i5 or i7 processor",
+              "Up to 16GB memory",
+              "Up to 2TB storage",
+              "Up to 20 hours battery life",
+              "Touch Bar and Touch ID"
+            ],
+            "ShowLearnMore": true
+          },
+          {
+            "pictureUrl": "MacBookPro_16.png",
+            "title": "MacBook Pro 16\"" ,
+            "pricing": ["2399","199.91","12"],
+            "currency": "$",
+            "specs": [
+              "16-inch Retina display",
+              "Intel Core i7 or i9 processor",
+              "Up to 64GB memory",
+              "Up to 8TB storage",
+              "Up to 11 hours battery life",
+              "Touch Bar and Touch ID"
+            ],
+            "ShowLearnMore": true
+          }
+        ],
+        "link": {
+          "title": "Are you a student ?",
+          "href": "/Students",
+          "style": "left"
+        },
+        "bgColor": "#fff",
+        "textColor": "#000",
+        "image": {
+          "url": "",
+          "style": ""
+        }
       }
     }
   }

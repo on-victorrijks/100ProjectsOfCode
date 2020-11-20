@@ -80,7 +80,6 @@
     width: calc(100% - 40px);
     margin: 20px;
     font-weight: 400;
-    text-shadow: 1px 1px 9px rgba(0, 0, 0, 0.59);
     white-space: pre-line;
 }
 .title.left{
@@ -100,6 +99,9 @@
 }
 .title.halfwidth{
     width: calc(50% - 40px);
+}
+.title.underline{
+    text-decoration: underline;
 }
 
 .description{
@@ -139,7 +141,6 @@
   border-radius: 40px;
   font-weight: 500;
   cursor: pointer;
-  text-shadow: 1px 1px 9px rgba(0, 0, 0, 0.59);
 }
 .link.classic{
     border: none;
@@ -230,6 +231,78 @@ h4.bot {
     height: 200px;
 }
 
+.option{
+    position: relative;
+    float: left;
+    width: calc((100% -  2px)/ 3);
+    border-right: solid 1px rgba(0, 0, 0, 0.1);
+}
+.option:nth-child(3){
+    border: none;
+}
+.option .poster{
+    position: relative;
+    float: left;
+    height: 100px;
+    width: 100%;
+}
+.option .specs{
+    position: relative;
+    float: left;
+    height: auto;
+    width: calc(100% - 40px);
+    margin: 20px;
+}
+.option .poster img{
+    position: absolute;
+    left: 0;right: 0;
+    height: 100px;
+    margin: auto;
+}
+
+.option .specs p{
+    text-align: left;
+    margin-bottom: 8px;
+    margin-left: 18px;
+    position: relative;
+}
+.option .specs p::after{
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: rgb(100,100,100);
+    position: absolute;
+    left: -14px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+}
+.option .specs h2{
+    text-align: left;
+}
+.option .specs h3{
+    text-align: left;
+    font-size: 13px;
+    opacity: 0.7;
+    font-weight: 500;
+    margin-bottom: 7px;
+}
+.option .specs a{
+    text-align: left;
+}
+.option .specs a {
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    color: #2f2fd8;
+    font-weight: 500;
+    position: relative;
+    margin-top: 25px;
+}
+.option .specs a:hover{
+    opacity: 0.6;
+}
 
 @media only screen and (max-width: 600px) {
     .description.sixtyWidth{

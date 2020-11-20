@@ -108,6 +108,42 @@ class Slide extends Component {
             </div>
           </div>
           }
+          {this.state.slideData["descType"] === 'prices' &&
+          <div className="content prices" style={{color: this.state.slideData["textColor"], borderColor: this.state.slideData["textColor"]}}>
+            {this.parseText(this.state.slideData["title"])}
+            
+            <table  className="table">
+              {this.state.slideData["tables"].map((p) =>
+                  <tr className="option" key={p.id}>
+                    <div className="poster">
+                      <img src={"/assets/"+p["pictureUrl"]}/>
+                    </div>
+                    <div className="specs">
+                      <h2>{p["title"]}</h2>
+                      <h3>From {p["currency"]+p["pricing"][0]} or {p["currency"]+p["pricing"][1]}/mo. for {p["pricing"][2]}mo.</h3>
+                      {p["specs"].map((spec) =>
+                        <p>{spec}</p>
+                      )}
+                      {p["ShowLearnMore"] &&
+                        <a href="/">
+                          Show More
+                        </a>
+                      }
+                    </div>
+                  </tr>
+              )}
+            
+            </table>
+
+            <div className={"linkContainer " + this.state.slideData["link"]["style"]}>
+              <a className={"link " + this.state.slideData["link"]["style"]} href={this.state.slideData["link"]["href"]}>
+                {this.state.slideData["link"]["title"]}
+                <i class="arrow right"></i>
+              </a>
+            </div>
+
+          </div>
+          }
         </div>
       }
       </div>
