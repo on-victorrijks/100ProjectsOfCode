@@ -22,7 +22,7 @@ General Web projects, from building a simple website to building tools for compl
   - [ ] [P2P File Sharing](#p2p-file-sharing)
   - [ ] [Web Search Engine](#search-engine)
   - [ ] [Bandwidth Monitor](#bandwidth-monitor)
-  - [ ] [Product Landing Page](#product-landing-page)
+  - [X] [Product Landing Page](#product-landing-page)
   - [ ] [Create Your Own Blog](#blog)
   - [ ] [Your Portfolio Website](#portfolio-website)
   - [ ] [Animated Navigation Toggle](#animated-navigation-toggle)
