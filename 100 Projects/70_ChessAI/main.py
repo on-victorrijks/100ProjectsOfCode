@@ -1,49 +1,170 @@
 import chess
+import random
 
-positions = [
-            'A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1',
-            'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2',
-            'A3', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'H3',
-            'A4', 'B4', 'C4', 'D4', 'E4', 'F4', 'G4', 'H4',
-            'A5', 'B5', 'C5', 'D5', 'E5', 'F5', 'G5', 'H5',
-            'A6', 'B6', 'C6', 'D6', 'E6', 'F6', 'G6', 'H6',
-            'A7', 'B7', 'C7', 'D7', 'E7', 'F7', 'G7', 'H7',
-            'A8', 'B8', 'C8', 'D8', 'E8', 'F8', 'G8', 'H8',
-        ]
+pieceTypes = [
+    'PAWN',
+    'KNIGHT',
+    'BISHOP',
+    'ROOK',
+    'QUEEN',
+    'KING'
+]
 
-def playerScore(board,color):
-    pieces = []
-    for pos in positions:
-        piece = board.piece_at(chess.SQUARES[pos])
-        piece_type = piece.piece_type
-        piece_color = piece.color
-        piece_symbol = piece.symbol()
+SCORETABLE_values = {
+    'PAWN':      1,
+    'KNIGHT':    3,
+    'BISHOP':    3,
+    'ROOK':      5,
+    'QUEEN':     1000000000000,
+    'KING':      9
+}
 
-        pieces.append({
-            "type": piece_type,
-            "color": piece_color,
-            "symbol": piece_symbol,
-        })
+FORMULA = {
+    "maxVictimValue": 1,
+    "pieceValue": 0.2,
+    "nbThreats": 0.1
+}
 
-    return pieces
+class Analyzer:
 
+    def __init__(self,AI_color):
+    
+        if AI_color == 'black':
+            self.AI_color = True
+        else:
+            self.AI_color = False
+
+        self.__board = chess.Board()
+
+    def isCheckmate(self):
+        return self.__board.is_checkmate()
+
+    def drawBoard(self):
+        print(self.__board.unicode())
+
+    def getLegalMoves(self):
+        return self.__board.legal_moves
+
+    def move(self,m):
+        self.__board.push(random_move)
+
+    def getPieceValueFromType(self,pieceType):
+        pieceValue = SCORETABLE_values[pieceType]
+        return pieceValue
+
+    def generateMoveScore(self,moveData):
+        
+        pieceType = moveData["type"]
+        piecePosition = moveData["position"]
+        pieceAttacks = moveData["attacks"]
+        pieceAttackers = moveData["attackers"]
+
+        # This piece's value
+        pieceValue = self.getPieceValueFromType(pieceType)
+        
+        # Possible attacks
+        maximumVictimValue = 0
+        if len(pieceAttacks) != 0:
+            victimsValues = []
+            for victim in pieceAttacks:
+                victimType = self.__board.piece_type_at(victim)
+                if victimType != None:
+                    victimsValues.append(self.getPieceValueFromType(pieceTypes[victimType-1]))
+
+            if len(victimsValues) != 0:
+                maximumVictimValue = max(victimsValues)
+
+        # Threats
+        nbThreats = len(pieceAttackers)
+        """
+        I should implement a way to verify if the case is protected and if the attackers are less valuable than this piece or not
+        """
         
 
-board = chess.Board()
+            
+        """
+        Piece Value
+        Maximum Gain
+        - number of threats
+        """
 
-while not board.is_checkmate():
-    print(board)
+        formulaResult = + pieceValue                                     \
+                        + FORMULA["maxVictimValue"] * maximumVictimValue \
+                        - FORMULA["nbThreats"] * nbThreats               \
+
+        if pieceType == "QUEEN":
+            formulaResult -= pieceValue
+                               
+
+        return formulaResult
+
+
+    def getBoardDetails(self):
+        boardData = {
+            'black': [],
+            'white': []
+        }
+
+        legal_moves = self.getLegalMoves()
+        legal_moves_starter = [m.uci()[0:2] for m in legal_moves]
+        legal_moves_ender = [m.uci()[2:4] for m in legal_moves]
+
+        for i in range(64):
+            pieceType = self.__board.piece_type_at(i)
+            pieceColor = self.__board.color_at(i)
+            piecePosition = chess.square_name(i)
+
+            if pieceColor != None:
+                if pieceColor:
+                    pieceClass = 'black'
+                else:
+                    pieceClass = 'white'
+                    
+                possibleVictims = [p for p in self.__board.attacks(i) if not self.__board.color_at(p) and chess.square_name(p) in legal_moves_ender ]
+                possibleAttacker = [a for a in self.__board.attackers(not self.AI_color,i) if chess.square_name(a) in legal_moves_starter ]
+
+
+                boardData[pieceClass].append({
+                    'type': pieceTypes[pieceType-1],
+                    'position': piecePosition,
+                    'attacks': possibleVictims,
+                    'attackers': possibleAttacker
+                })
+        
+        return boardData
+
+
+AI_color = 'black'
+AI_OP_color = 'white'
+Analyzer = Analyzer(AI_color)
+s = 0
+while not Analyzer.isCheckmate() and s < 100:
     
-    legals = list(board.legal_moves)
+    Analyzer.drawBoard()
+    print('')
 
-    print(playerScore(board,'x'))
+    allMoves = Analyzer.getBoardDetails()
+    # AI moves
+    AI_Moves = allMoves[AI_color]
+    AI_score = 0
+    for moveIndex,moveData in enumerate(AI_Moves):
+        AI_score += (Analyzer.generateMoveScore(moveData))
 
-    print(legals)
-    usrInpValid = False
-    while not usrInpValid:
-        userMove = str(input('Your move: '))
-        fUserMove = chess.Move.from_uci(userMove)
-        if fUserMove in legals:
-            usrInpValid = True
+    # AI-Opposite moves
+    AI_OP_Moves = allMoves[AI_OP_color]
+    AI_OP_score = 0
+    for moveIndex,moveData in enumerate(AI_OP_Moves):
+        AI_OP_score += (Analyzer.generateMoveScore(moveData))
     
-    board.push(fUserMove)
+    if AI_OP_score > AI_score:
+        print('AI OP is winning',(AI_score,AI_OP_score))
+    elif AI_OP_score == AI_score:
+        print('No winner')
+    else:
+        print('AI is winning',(AI_score,AI_OP_score))
+
+    random_move = random.choice(list(Analyzer.getLegalMoves()))
+    
+    Analyzer.move(random_move)
+    s+=1
+
