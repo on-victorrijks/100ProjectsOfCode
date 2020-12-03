@@ -1,5 +1,9 @@
 import chess
+import chess.svg
 import random
+import matplotlib.pyplot as plt
+
+
 
 pieceTypes = [
     'PAWN',
@@ -15,13 +19,12 @@ SCORETABLE_values = {
     'KNIGHT':    3,
     'BISHOP':    3,
     'ROOK':      5,
-    'QUEEN':     1000000000000,
+    'QUEEN':     10,
     'KING':      9
 }
 
 FORMULA = {
-    "maxVictimValue": 1,
-    "pieceValue": 0.2,
+    "maxVictimValue": 0.1,
     "nbThreats": 0.1
 }
 
@@ -39,7 +42,14 @@ class Analyzer:
     def isCheckmate(self):
         return self.__board.is_checkmate()
 
-    def drawBoard(self):
+    def drawBoard(self,s,isBigChange=False):
+
+        if isBigChange:
+            boardsvg = chess.svg.board(board=self.__board)
+            f = open("BigChance_"+str(s)+".SVG", "w")
+            f.write(boardsvg)
+            f.close()
+
         print(self.__board.unicode())
 
     def getLegalMoves(self):
@@ -134,14 +144,16 @@ class Analyzer:
         return boardData
 
 
+MEMORY_AI_Advantages = []
 AI_color = 'black'
 AI_OP_color = 'white'
 Analyzer = Analyzer(AI_color)
 s = 0
+
+toMove = AI_color
+
 while not Analyzer.isCheckmate() and s < 100:
     
-    Analyzer.drawBoard()
-    print('')
 
     allMoves = Analyzer.getBoardDetails()
     # AI moves
@@ -156,15 +168,68 @@ while not Analyzer.isCheckmate() and s < 100:
     for moveIndex,moveData in enumerate(AI_OP_Moves):
         AI_OP_score += (Analyzer.generateMoveScore(moveData))
     
-    if AI_OP_score > AI_score:
-        print('AI OP is winning',(AI_score,AI_OP_score))
-    elif AI_OP_score == AI_score:
+    # AI advantage
+    AI_Advantage = AI_score - AI_OP_score
+
+    # big gain
+    if len(MEMORY_AI_Advantages) > 0:
+        AI_Advantage_last = MEMORY_AI_Advantages[(len(MEMORY_AI_Advantages)-1)]
+    else:
+        AI_Advantage_last = 1
+    
+    if AI_Advantage_last == 0:
+        AI_Advantage_last = 0.01
+
+    isBigChange = False
+    if abs(AI_Advantage/AI_Advantage_last)-1 > 1:
+        print('Big change !')
+        isBigChange = True
+
+
+    if AI_Advantage < 0:
+        print('AI OP is winning',(AI_Advantage))
+    elif AI_Advantage == 0:
         print('No winner')
     else:
-        print('AI is winning',(AI_score,AI_OP_score))
+        print('AI is winning',(AI_Advantage))
+
+    print('Turn '+str(s))
+    if isBigChange:
+        Analyzer.drawBoard(s,True)
+    else:
+        Analyzer.drawBoard(s)
+    print('')
 
     random_move = random.choice(list(Analyzer.getLegalMoves()))
     
     Analyzer.move(random_move)
-    s+=1
+
+    if toMove == AI_color:
+        toMove = AI_OP_color
+        MEMORY_AI_Advantages.append(AI_Advantage)
+        s+=1
+    else:
+        toMove = AI_color
+        MEMORY_AI_Advantages.append(AI_Advantage)
+
+def getAverageScore2turn(raw):
+
+    MEMORY_Average_Advantages = []
+
+    for i,v in enumerate(raw):
+
+        if i%2 == 0:
+            lastElm = raw[i-1]
+            avg = (lastElm + v) /2
+            MEMORY_Average_Advantages.append(avg)
+
+    return MEMORY_Average_Advantages
+
+plt.plot(MEMORY_AI_Advantages)
+plt.ylabel('AI Advantage per turn')
+plt.show()
+
+plt.plot(getAverageScore2turn(MEMORY_AI_Advantages))
+plt.ylabel('AI Advantage per turn (avg)')
+plt.show()
 
