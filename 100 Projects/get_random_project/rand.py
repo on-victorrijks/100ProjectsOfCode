@@ -3,7 +3,8 @@ import random
 doneList = [
     87,
     9,
-    70
+    70,
+    59
 ]
 
 isResValid = False
@@ -18,5 +19,7 @@ print(r)
 """
 09/11/20,87,Emoji Translator
 12/11/20,9,Product Landing Page
-20/11/20,70,Chess AI,I will use Chessboard.js because I have not done the Chess board project
+20/11/20,70,Chess AI
+23/12/20,59,Codec Software,It's a good project to learn C++
+
 """

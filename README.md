@@ -92,7 +92,7 @@ Projects that provide a deeper insight into the inner workings of many CS relate
   - 9 projects
 ### Cryptography  
 Projects that involve dealing with encryption/decryption or in general computer security.  
-  - [ ] [Codec Software](#codec-software)
+  - [ ] [Codec Software](#codec-software) ⏳ working on...
   - [ ] [Password Manager](#password-manager)
   - [ ] [Password Generator](#password-generator)
   - [ ] [Folder Encrypter/Locker](#folder-encrypter)
@@ -106,7 +106,7 @@ All work and no play makes jack a dull boy! Games are a must to enjoy and learn 
   - [ ] [Chess](#chess)
   - [ ] [Snake](#snake)
   - [ ] [Tetris](#tetris)
-  - [ ] [Chess AI](#chess-ai) ⏳ This project has been moved to https://github.com/on-victorrijks/ChessAI
+  - [X] [Chess AI](#chess-ai) ⏳ This project has been moved to https://github.com/on-victorrijks/ChessAI
   - [ ] [Snake AI](#snake-ai)
   - [ ] [Map Maker](#map-maker)
   - [ ] [Battleship](#battleship)
