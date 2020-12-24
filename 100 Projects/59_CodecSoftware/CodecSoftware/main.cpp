@@ -4,9 +4,56 @@
 #include <ctype.h>
 using namespace std;
 
-
-string alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+string alphabet = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
 const char* algorithms[2] = { "Caesar", "RSA" };
+
+// Get prime
+bool isPrime(int n) {
+
+	// STEP 1
+	int nmin = n - 1;
+
+	double temp_k = 1;
+	double c = pow(2.00, temp_k);
+
+	while (std::fmod(nmin,c) == 0) {
+		temp_k += 1;
+		c = pow(2.00, temp_k);
+	}
+
+	double k = temp_k - 1;
+	int m = nmin / pow(2.00,k);
+	
+	// STEP 2
+	// 1 < a < n-1
+	int a = 2;
+
+	// STEP 3
+	// bo
+	int bo = std::fmod(pow(a, m), n);
+	if (bo == -1 || bo == 1) {
+		return true;
+	}
+
+
+	// bn
+	int bn = bo;
+	while (true) {
+		bn = std::fmod(pow(bn, 2), n);
+		cout << bn;
+		if (bn == nmin) {
+			return true;
+		}
+		if (bn == -1) {
+			return true;
+		} else if (bn == 1) {
+			return false;
+		}
+	}
+
+}
+
+// Caesar
 
 int letterPosition(string elements, char element) {
 
@@ -26,11 +73,11 @@ int letterPosition(string elements, char element) {
 }
 
 string cipher_substitution(float decrypt, string text, int decal) {
-	
+
 	string result = "";
 
 	for (char const& c : text) {
-			
+
 		int position = letterPosition(alphabet, c);
 
 		if (position != -1) {
@@ -49,7 +96,8 @@ string cipher_substitution(float decrypt, string text, int decal) {
 
 			char newLetter = alphabet[tempPosition];
 			result += newLetter;
-		} else {
+		}
+		else {
 			result += c;
 		}
 
@@ -57,6 +105,10 @@ string cipher_substitution(float decrypt, string text, int decal) {
 
 	return result;
 }
+
+// RSA
+
+
 
 void welcome() {
 	cout << "Codec Software V1.0" << endl;
@@ -71,15 +123,6 @@ void showAlgorithms() {
 	}
 }
 
-string convertToString(char* a, int size){
-	int i;
-	string s = "";
-	for (i = 0; i < size; i++) {
-		s = s + a[i];
-	}
-	return s;
-}
-
 int main() {
 
 	int chosenAlgoIndex;
@@ -88,6 +131,12 @@ int main() {
 	int numberOfAlgorithms = sizeof(algorithms) / sizeof(algorithms[0]);
 	float shouldDecrypt = false;
 
+	if (isPrime(307)) {
+		cout << "prime" << endl;
+	}
+	else {
+		cout << "not prime" << endl;
+	}
 
 	welcome();
 	showAlgorithms();
@@ -127,13 +176,9 @@ int main() {
 	}
 
 	// Main program
-	if (shouldDecrypt) {
-		cout << "---------------Decrypted text---------------";
-	} else {
-		cout << "---------------Encrypted text---------------";
-	}
 
 	string chosenAlgo_str = algorithms[chosenAlgoIndex];
+	string result = "";
 
 	if (chosenAlgo_str == "Caesar") {
 
@@ -147,16 +192,26 @@ int main() {
 			decal_encryption = -decal_encryption;
 		}
 
-		string result = cipher_substitution(shouldDecrypt, enteredText, decal_encryption);
-
-		cout << result << endl;
+		result = cipher_substitution(shouldDecrypt, enteredText, decal_encryption);
 
 	} else if (chosenAlgo_str == "RSA") {
 
 		// ...
 
+	} else {
+
+		// ...
+
+	}
+
+	if (shouldDecrypt) {
+		cout << "---------------Decrypted text---------------" << endl;
 	}
 	else {
+		cout << "---------------Encrypted text---------------" << endl;
+	}
+
+	cout << result << endl;
 
 
 
